@@ -1,4 +1,4 @@
-import { Form, redirect, useLoaderData } from "react-router-dom";
+import { Form, redirect, useLoaderData, useNavigate } from "react-router-dom";
 import { IContact } from "..";
 import { updateContact } from "../contracts";
 
@@ -15,6 +15,7 @@ async function action({ request, params }: IProps) {
 
 function EditContact() {
   const contact = useLoaderData() as IContact;
+  const navigate = useNavigate();
 
   return (
     <Form method="post" id="contact-form">
@@ -60,7 +61,14 @@ function EditContact() {
       </label>
       <p>
         <button type="submit">Save</button>
-        <button type="button">Cancel</button>
+        <button
+          type="button"
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          Cancel
+        </button>
       </p>
     </Form>
   );
